@@ -1,0 +1,18 @@
+[sshd]
+enabled = true
+bantime  = 12h
+findtime  = 60m
+maxretry = 5
+
+[nginx-botsearch]
+enabled = true
+bantime  = 12h
+findtime  = 60m
+maxretry = 5
+
+[ansServices]
+enabled = true
+filter   = sshd
+action   = iptables-allports
+logpath  = /var/log/ansServices.log
+bantime  = 12h

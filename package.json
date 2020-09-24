@@ -1,0 +1,21 @@
+{
+  "name": "fail2banAtMongodb",
+  "description": "fail2ban sync ban list via mongoDb",
+  "version": "0.0.3",
+  "scripts": {
+    "start": "node app.js",
+    "firstrun": "node stuff/makeIndex.js",
+    "status": "node stuff/printJailStatus.js",
+    "installHelper": "help/install.sh"
+  },
+  "dependencies": {
+    "minimalMongodb": "git+https://git.ans.aero/Libs/minimalMongodb.git",
+    "fail2ban": "git+https://github.com/drudrum/fail2ban.git"
+  },
+  "readme": "",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drudrum/fail2banAtMongodb.git"
+  }
+}

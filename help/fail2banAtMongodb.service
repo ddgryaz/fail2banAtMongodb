@@ -1,0 +1,15 @@
+[Unit]
+Description=fail2banAtMongodb
+After=syslog.target network.target
+
+[Service]
+PIDFile=/var/run/fail2banAtMongodb.pid
+ExecStart=node app.js
+User=root
+Group=root
+RestartSec=15
+Restart=always
+WorkingDirectory=$PWD
+
+[Install]
+WantedBy=multi-user.target

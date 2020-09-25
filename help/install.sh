@@ -9,7 +9,7 @@ while read line; do
   else
     echo "$line">>$outServiceFile
   fi
-done < fail2banAtMongodb.service
+done < help/fail2banAtMongodb.service
 systemctl daemon-reload
 
 mkdir -p /etc/fail2ban/jail.d/

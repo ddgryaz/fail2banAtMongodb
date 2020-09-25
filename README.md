@@ -44,13 +44,12 @@ sudo npm start
 
 ## Install to system
 ```
-  sudo help/install.sh
+sudo help/install.sh
 ```
 
 [Script](help/install.sh) create [configs](help/configExamples.md)
 - [/etc/systemd/system/fail2banAtMongodb.service](help/fail2banAtMongodb.service)
 - [/etc/fail2ban/jail.d/custom.local](help/custom.local)
-
 
 
 Then start service, check it, enable on boot.

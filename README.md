@@ -4,6 +4,9 @@ This is nodejs application to synchronize ban list at multiple servers.
 Application run as daemon. Application connect to fail2ban via unix socket.
 ![Scheme](help/fail2banAtMongodb.svg)
 
+## Install video
+![Video](help/fail2banAtMongodb.gif)
+
 ## Install
 
 ```bash

@@ -12,7 +12,7 @@ const fail = new Fail2Ban(f2bSocket);
 
 const banTime=settings.banTime || (60*60*12); //12h
 
-const jailNames=(settings.jailNames||['nginx-botsearch','sshd']).concat([ourJailName];
+const jailNames=(settings.jailNames||['nginx-botsearch','sshd']).concat([ourJailName]);
 const jailAns=new Jail(ourJailName,f2bSocket);
 
 const initTime=new Date((new Date()).getTime()-(banTime*1000));

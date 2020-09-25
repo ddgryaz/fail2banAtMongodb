@@ -11,8 +11,13 @@ findtime  = 60m
 maxretry = 5
 
 [ansServices]
+#This is a jail for fail2banAtMongodb
+#This jail used to receive bans from another servers
+#Log file would be empty
+#Fail2ban require filter property, to start jail :(
 enabled = true
 filter   = sshd
 action   = iptables-allports
-logpath  = /var/log/ansServices.log
+logpath  = /dev/null
+backend  = polling
 bantime  = 12h

@@ -10,7 +10,7 @@ Application run as daemon. Application connect to fail2ban via socket.
 npm install fail2banAtMongodb
 ```
 
-create [settings.js](help/settings.js)
+create [settings.js](help/settings.example.js)
 ```javascript
 module.exports={
   dbSettings:{
@@ -35,17 +35,37 @@ Create collections and indexes (expire time)
 npm run firstrun
 ```
 
-run at console (need root access /var/run/fail2ban/fail2ban.sock)
+Run service at console (Root access for /var/run/fail2ban/fail2ban.sock)
 ```bash
 sudo npm start
 ```
 
-Show jail status
+## Install to system
 ```
+  sudo help/install.sh
+```
+
+[Script](help/install.sh) create [configs](help/configExamples.md)
+- [/etc/systemd/system/fail2banAtMongodb.service](help/fail2banAtMongodb.service)
+- [/etc/fail2ban/jail.d/custom.local](help/custom.local)
+
+
+
+Then start service, check it, enable on boot.
+```
+sudo systemctl start fail2banAtMongodb
+sudo systemctl status fail2banAtMongodb
+sudo systemctl enable fail2banAtMongodb
+```
+
+
+## Show jail status
+root access for /var/run/fail2ban/fail2ban.sock
+```bash
 sudo npm run status
 ```
 Status like this:
-```
+```bash
 sshd
 {
   filter: {
@@ -77,53 +97,33 @@ ansServices
 }
 ```
 
-## Install to system
+## Manual ban / unban
+Ban ip at all servers
+```sh
+npm run ban 12.12.12.12
 ```
-  sudo npm run installHelper
+Unban at all servers
+```sh
+npm run unban 12.12.12.12
 ```
-helper script creates
-/etc/systemd/system/fail2banAtMongodb.service
-/etc/fail2ban/jail.d/custom.local
 
+## Ban and unban via mongoDb
+just insert doc to 'ban'/'unban' collection.
+All servers will transfer ban to a jail.
 
-## systemd service
-example [/etc/systemd/system/fail2banAtMongodb.service](help/fail2banAtMongodb.service)
+Examples:
+```javascript
+await mdb.collection('ban').insertOne({
+  ip:'123.123.12.12',
+  t:new Date(),
+  msg:'tst'
+});
+
+await mdb.collection('unban').insertOne({
+  ip:'12.12.12.12',
+  t:new Date(),
+  reason:'Test manual'
+});
 ```
-[Unit]  
-Description=fail2banAtMongodb
-After=syslog.target network.target
 
-[Service]  
-PIDFile=/var/run/fail2banAtMongodb.pid
-WorkingDirectory=/srv/fail2banAtMongodb/
-ExecStart=node app.js
-User=root
-Group=root
-RestartSec=15
-Restart=always
-
-[Install]  
-WantedBy=multi-user.target
-```
-# fail2ban config
-example [/etc/fail2ban/jail.d/custom.local](help/custom.local)
-```
-[sshd]
-enabled = true
-bantime  = 12h
-findtime  = 60m
-maxretry = 5
-
-[nginx-botsearch]
-enabled = true
-bantime  = 12h
-findtime  = 60m
-maxretry = 5
-
-[ansServices]
-enabled = true
-filter   = sshd
-action   = iptables-allports
-logpath  = /var/log/ansServices.log
-bantime  = 12h
-```
+You can [create special role](help/createRole.md) at mongoDb, to access this collections from another services

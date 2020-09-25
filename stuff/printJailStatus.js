@@ -9,14 +9,13 @@ const ourJailName=settings.ourJailName||'ansServices';
 
 const timeoutPromise = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 const banTime=settings.banTime || (60*60*12); //12h
-const jailAns=new Jail(ourJailName,f2bSocket);
-const jailNames=['nginx-botsearch','sshd',ourJailName];
+const jailNames=(settings.jailNames||['nginx-botsearch','sshd']).concat([ourJailName]);
+const fail = new Fail2Ban(f2bSocket);
 
 (async function() {     // Can't use await at the top level
-  //console.log(await jailAns.status);
-
+  console.log("Fail2Ban status");
+  console.dir(await fail.status);
   global.mdb=await dbConnector.connect();
-
   let cmd=process.argv[2];
   //console.log("cmd",cmd,'ip:',ip);
   let ip=process.argv[3]||'10.152.64.98';
@@ -38,7 +37,6 @@ const jailNames=['nginx-botsearch','sshd',ourJailName];
   }
 
   await timeoutPromise(1000);
-  //console.log(await jailAns.status);
   for (var jailIdx=0;jailIdx<jailNames.length;jailIdx++){
     let jailName=jailNames[jailIdx];
     let jail=new Jail(jailName,f2bSocket);

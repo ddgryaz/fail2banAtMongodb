@@ -1,21 +1,38 @@
 {
-  "name": "fail2banAtMongodb",
+  "name": "@alekseydruzhinin/fail2banatmongodb",
   "description": "fail2ban sync ban list via mongoDb",
   "version": "0.0.3",
   "scripts": {
     "start": "node app.js",
     "firstrun": "node stuff/makeIndex.js",
     "status": "node stuff/printJailStatus.js",
+    "ban": "node stuff/printJailStatus.js ban",
+    "unban": "node stuff/printJailStatus.js unban",
     "installHelper": "help/install.sh"
   },
   "dependencies": {
     "minimalMongodb": "git+https://git.ans.aero/Libs/minimalMongodb.git",
     "fail2ban": "git+https://github.com/drudrum/fail2ban.git"
   },
-  "readme": "",
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/drudrum/fail2banAtMongodb.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/drudrum/fail2banAtMongodb/issues"
+  },
+  "homepage": "https://github.com/drudrum/fail2banAtMongodb#readme",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [
+    "fail2ban",
+    "mongodb",
+    "sync",
+    "synhronize",
+    "servers",
+    "multiple",
+    "socket"
+  ],
+  "author": "Aleksey Druzhinin"
 }

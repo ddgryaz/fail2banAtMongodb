@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 outServiceFile=/etc/systemd/system/fail2banAtMongodb.service
 echo "Creating $outServiceFile"
 echo "">$outServiceFile
@@ -9,11 +9,11 @@ while read line; do
   else
     echo "$line">>$outServiceFile
   fi
-done < help/fail2banAtMongodb.service
+done < fail2banAtMongodb.service
 systemctl daemon-reload
 
 mkdir -p /etc/fail2ban/jail.d/
-cp -v help/custom.local /etc/fail2ban/jail.d/
+cp -v custom.local /etc/fail2ban/jail.d/
 fail2ban-client reload
 
 chown root:root $PWD -R

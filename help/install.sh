@@ -13,7 +13,7 @@ done < help/fail2banAtMongodb.service
 systemctl daemon-reload
 
 mkdir -p /etc/fail2ban/jail.d/
-cp -v custom.local /etc/fail2ban/jail.d/
+cp -v help/custom.local /etc/fail2ban/jail.d/
 fail2ban-client reload
 
 chown root:root $PWD -R

@@ -92,7 +92,7 @@ ansServices
   filter: {
     currentlyFailed: 16,
     totalFailed: 1564,
-    fileList: [ '_SYSTEMD_UNIT=sshd.service + _COMM=sshd' ]
+    fileList: [ '/dev/null' ]
   },
   actions: { currentlyBanned: 0, totalBanned: 256, bannedIPList: [] }
 }

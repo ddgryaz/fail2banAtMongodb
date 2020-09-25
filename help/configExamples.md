@@ -8,7 +8,7 @@ After=syslog.target network.target
 [Service]  
 PIDFile=/var/run/fail2banAtMongodb.pid
 WorkingDirectory=/srv/fail2banAtMongodb/
-ExecStart=node app.js
+ExecStart=/usr/bin/node app.js
 User=root
 Group=root
 RestartSec=15

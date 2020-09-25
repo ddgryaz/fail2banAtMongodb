@@ -1,7 +1,6 @@
 {
-  "name": "@alekseydruzhinin/fail2banatmongodb",
+  "name": "fail2banatmongodb",
   "description": "fail2ban sync ban list via mongoDb",
-  "version": "0.0.3",
   "scripts": {
     "start": "node app.js",
     "firstrun": "node stuff/makeIndex.js",
@@ -34,5 +33,6 @@
     "multiple",
     "socket"
   ],
-  "author": "Aleksey Druzhinin"
+  "author": "Aleksey Druzhinin",
+  "version": "1.0.0"
 }

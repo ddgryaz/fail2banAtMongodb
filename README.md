@@ -12,7 +12,7 @@ cd fail2banAtMongodb
 npm install
 ```
 
-create [settings.js](help/settings.example.js)
+Create [settings.js](help/settings.example.js)
 ```javascript
 module.exports={
   dbSettings:{
@@ -47,7 +47,7 @@ sudo npm start
 sudo help/install.sh
 ```
 
-[Script](help/install.sh) create [configs](help/configExamples.md)
+[Script](help/install.sh) creates [configs](help/configExamples.md)
 - [/etc/systemd/system/fail2banAtMongodb.service](help/fail2banAtMongodb.service)
 - [/etc/fail2ban/jail.d/custom.local](help/custom.local)
 
@@ -61,7 +61,7 @@ sudo systemctl enable fail2banAtMongodb
 
 
 ## Show jail status
-root access for /var/run/fail2ban/fail2ban.sock
+Root access for /var/run/fail2ban/fail2ban.sock
 ```bash
 sudo npm run status
 ```
@@ -99,17 +99,17 @@ ansServices
 ```
 
 ## Manual ban / unban
-Ban ip at all servers
+Ban ip at all servers.
 ```sh
 npm run ban 12.12.12.12
 ```
-Unban at all servers
+Unban at all servers.
 ```sh
 npm run unban 12.12.12.12
 ```
 
 ## Ban and unban via mongoDb
-just insert doc to 'ban'/'unban' collection.
+just insert doc into 'ban'/'unban' collection.
 All servers will transfer ban to a jail.
 
 Examples:
@@ -127,4 +127,4 @@ await mdb.collection('unban').insertOne({
 });
 ```
 
-You can [create special role](help/createRole.md) at mongoDb, to access this collections from another services
+You can [create special role](help/createRole.md) at mongoDb, to access this collections from another services.

@@ -23,7 +23,14 @@
   },
   "homepage": "https://github.com/drudrum/fail2banAtMongodb#readme",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
   "keywords": [
     "fail2ban",
     "mongodb",

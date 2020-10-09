@@ -10,7 +10,7 @@
     "installHelper": "help/install.sh"
   },
   "dependencies": {
-    "minimalMongodb": "git+https://git.ans.aero/Libs/minimalMongodb.git",
+    "MinimalMongodb": "git+https://git.ans.aero/Libs/MinimalMongodb.git",
     "fail2ban": "git+https://github.com/drudrum/fail2ban.git"
   },
   "license": "GPL-3.0-or-later",

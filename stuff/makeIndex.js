@@ -1,5 +1,5 @@
 const settings = require('../settings.js')
-const dbConnector = new (require('minimalMongodb'))(settings.dbSettings)
+const dbConnector = new (require('MinimalMongodb'))(settings.dbSettings)
 const banTime = settings.banTime || (60 * 60 * 12); // 12h
 
 (async function () { // Can't use await at the top level

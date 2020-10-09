@@ -35,6 +35,11 @@ module.exports={
 };
 ```
 
+Hide settings from other users
+```bash
+chmod 770 settings.js
+```
+
 Create collections and indexes (expire time)
 ```bash
 npm run firstrun

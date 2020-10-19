@@ -4,10 +4,13 @@ const banTime = settings.banTime || (60 * 60 * 12); // 12h
 
 (async function () { // Can't use await at the top level
   const mdb = await dbConnector.connect()
-  /* try{
-    await mdb.collection('ban').drop()
-  }catch(e){}
-  try{
+   /*try{
+    await mdb.createCollection('events', {
+      capped: true,
+      size: 100000
+    })
+  }catch(e){}*/
+  /*try{
     await mdb.collection('unban').drop()
   }catch(e){} */
 

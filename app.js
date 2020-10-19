@@ -236,7 +236,7 @@ async function refreshDbBans () {
     await refreshState() // detect new ban ip and store to mongoDb
     // another servers will read it and block
 
-    timeoutPromise(settings.loop || 15000)
+    await timeoutPromise(settings.loop || 15000)
   }
 
   await dbConnector.client.close()

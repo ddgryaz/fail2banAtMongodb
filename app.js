@@ -99,7 +99,9 @@ async function addDelIgnoreIp (oper, ip) {
 
 var lastIgnoreIpCheckTime = 0
 async function refreshDbIgnores () {
-  const docs = await mdb.collection('ignore').find({}).toArray()
+  const docs = await mdb.collection('ignore').find({}, {
+    readPreference: 'secondaryPreferred'
+  }).toArray()
   const newIgnore = {}
   const ipsList = docs.map((doc) => {
     newIgnore[doc.ip] = doc
@@ -128,6 +130,8 @@ async function refreshDbIgnores () {
 async function refreshDbBans () {
   const unbanDocs = await mdb.collection('unban').find({
     t: { $gt: state.times.unban }
+  }, {
+    readPreference: 'secondaryPreferred'
   }).toArray()
   unbanDocs.forEach((unbanDoc) => {
     unbanIp[unbanDoc.ip] = unbanDoc
@@ -138,6 +142,8 @@ async function refreshDbBans () {
   const banDocs = await mdb.collection('ban').find({
     t: { $gt: state.times.ban },
     serverName: { $ne: serverName }
+  }, {
+    readPreference: 'secondaryPreferred'
   }).toArray()
   for (var i = 0; i < banDocs.length; i++) {
     const banDoc = banDocs[i]
@@ -219,6 +225,8 @@ async function refreshDbBans () {
   (await mdb.collection('ban').find({
     serverName: serverName,
     t: { $gte: initTime }
+  }, {
+    readPreference: 'secondaryPreferred'
   }).toArray()).forEach((doc) => {
     if (!state[doc.jail]) return
     state[doc.jail].actions.bannedIPList.push(doc.ip)

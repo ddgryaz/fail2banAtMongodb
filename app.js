@@ -1,7 +1,7 @@
 const Jail = require('fail2ban').Jail
 const Fail2Ban = require('fail2ban').Fail2Ban
 const settings = require('./settings.js')
-const dbConnector = new (require('minimalMongodb'))(settings.dbSettings)
+const dbConnector = new (require('MinimalMongodb'))(settings.dbSettings)
 const serverName = settings.serverName || require('os').hostname()
 
 const f2bSocket = settings.fail2banSocket || '/var/run/fail2ban/fail2ban.sock'

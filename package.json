@@ -10,6 +10,7 @@
     "installHelper": "help/install.sh"
   },
   "dependencies": {
+    "PrepareWords": "git+https://git.ans.aero/Libs/PrepareWords.git",
     "MinimalMongodb": "git+https://git.ans.aero/Libs/MinimalMongodb.git",
     "fail2ban": "git+https://github.com/drudrum/fail2ban.git"
   },

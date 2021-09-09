@@ -1,6 +1,7 @@
 const Jail = require('fail2ban').Jail
 const Fail2Ban = require('fail2ban').Fail2Ban
 const settings = require('./settings.js')
+const makeWordsArray = require('./stuff/makeWordsArray.js')
 const dbConnector = new (require('MinimalMongodb'))(settings.dbSettings)
 const serverName = settings.serverName || require('os').hostname()
 
@@ -56,7 +57,8 @@ async function refreshState () {
             serverName: serverName,
             t: new Date(),
             dbUser: settings.dbSettings.user,
-            appDb: settings.dbSettings.db
+            appDb: settings.dbSettings.db,
+            words: makeWordsArray(ip)
           }
         }, {
           upsert: true

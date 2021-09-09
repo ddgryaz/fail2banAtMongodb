@@ -2,6 +2,7 @@ const Jail = require('fail2ban').Jail
 const Fail2Ban = require('fail2ban').Fail2Ban
 const settings = require('../settings.js')
 const dbConnector = new (require('MinimalMongodb'))(settings.dbSettings)
+const makeWordsArray = require('../stuff/makeWordsArray.js')
 
 const f2bSocket = settings.fail2banSocket || '/var/run/fail2ban/fail2ban.sock'
 const ourJailName = settings.ourJailName || 'ansServices'
@@ -9,6 +10,7 @@ const ourJailName = settings.ourJailName || 'ansServices'
 const timeoutPromise = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout))
 const jailNames = (settings.jailNames || ['nginx-botsearch', 'sshd']).concat([ourJailName])
 const fail = new Fail2Ban(f2bSocket);
+const serverName = require('os').hostname();
 
 (async function () { // Can't use await at the top level
   console.log('Fail2Ban status')
@@ -22,15 +24,19 @@ const fail = new Fail2Ban(f2bSocket);
     await mdb.collection('ban').insertOne({
       ip: ip,
       t: new Date(),
-      msg: 'tst',
-      serverName: 'TestApp'
+      msg: 'Manual Banned',
+      serverName: serverName,
+      appDb: settings.dbSettings.db,
+      dbUser: settings.dbSettings.user,
+      words: makeWordsArray(ip)
     })
   } else if (cmd === 'unban') {
     console.log('Unban', ip)
     await mdb.collection('unban').insertOne({
       ip: ip,
       t: new Date(),
-      reason: 'Test manual'
+      reason: 'Manual Unbanned',
+      words: makeWordsArray(ip)
     })
   }
 
